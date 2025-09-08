@@ -1,0 +1,13 @@
+services:
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+      - /app/.venv
+    environment:
+      - PYTHONPATH=/app
+      - UV_CACHE_DIR=/tmp/uv-cache
+    command: uv run uvicorn main:app --host 0.0.0.0 --reload
+    restart: unless-stopped
